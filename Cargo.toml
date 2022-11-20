@@ -10,7 +10,13 @@ name = "common"
 path = "src/common/lib.rs"
 
 [[bin]]
+name = "utils"
+path = "src/utils/main.rs"
+
+[[bin]]
 name = "day01"
 path = "src/day01/main.rs"
 
 [dependencies]
+reqwest = { version = "0.11", features = ["json"] }
+tokio = { version = "1", features = ["full"] }
