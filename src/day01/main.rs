@@ -19,19 +19,17 @@ fn sums(lines: &Vec<Line>) -> Vec<i32> {
         Line::Empty => true,
         _ => false,
     });
-    let split_sums: Vec<i32> = split
-        .map(|lines| {
-            lines
-                .iter()
-                .map(|line| match line {
-                    Line::IntLine(x) => *x,
-                    _ => 0,
-                })
-                .sum()
-        })
-        .collect();
+    let split_sums = split.map(|lines| {
+        lines
+            .iter()
+            .map(|line| match line {
+                Line::IntLine(x) => *x,
+                _ => 0,
+            })
+            .sum()
+    });
 
-    let mut sums: Vec<i32> = split_sums.into_iter().collect();
+    let mut sums: Vec<i32> = split_sums.collect();
     sums.sort();
     sums
 }
