@@ -3,14 +3,37 @@ use common::*;
 #[derive(Debug)]
 enum Line {
     IntLine(i32),
+    Empty,
 }
 
 fn line_parser(line: &str, _previous_lines: &Vec<Line>) -> Option<Line> {
     if !line.eq("") {
         Some(Line::IntLine(line.parse::<i32>().unwrap()))
     } else {
-        None
+        Some(Line::Empty)
     }
+}
+
+fn sums(lines: &Vec<Line>) -> Vec<i32> {
+    let split = lines.split(|line| match line {
+        Line::Empty => true,
+        _ => false,
+    });
+    let split_sums: Vec<i32> = split
+        .map(|lines| {
+            lines
+                .iter()
+                .map(|line| match line {
+                    Line::IntLine(x) => *x,
+                    _ => 0,
+                })
+                .sum()
+        })
+        .collect();
+
+    let mut sums: Vec<i32> = split_sums.into_iter().collect();
+    sums.sort();
+    sums
 }
 
 fn generate_input_1(lines: &Vec<Line>) -> Input1 {
@@ -34,7 +57,8 @@ impl<'a> Solver<Input1<'a>> for Part1Solver<'a> {
         Self { input }
     }
     fn solve(&mut self) -> String {
-        String::from("part 1 solution")
+        let s = sums(self.input);
+        s.last().unwrap().to_string()
     }
 }
 
@@ -48,13 +72,13 @@ impl<'a> Solver<Input2<'a>> for Part2Solver<'a> {
         Self { input }
     }
     fn solve(&mut self) -> String {
-        String::from("part 2 solution")
+        let s = sums(self.input);
+        s.iter().rev().take(3).sum::<i32>().to_string()
     }
 }
 
 fn main() {
     let input_lines = read_input_file("01", line_parser);
-    println!("{:?}", input_lines);
 
     println!(
         "{}",
