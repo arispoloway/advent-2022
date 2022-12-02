@@ -25,8 +25,3 @@ pub fn lines(filename: &str) -> Vec<String> {
         .map(|x| x.trim_end().to_string())
         .collect()
 }
-
-pub trait Solver<T> {
-    fn new(input: T) -> Self;
-    fn solve(&mut self) -> String;
-}
