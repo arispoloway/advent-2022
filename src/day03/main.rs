@@ -22,9 +22,8 @@ fn l_score(l: char) -> i32 {
 
 fn p1_score(l: &Line) -> i32 {
     let half = l.len() / 2;
-    let first = HashSet::<_>::from_iter(l[..half].chars());
     let last = HashSet::<_>::from_iter(l[half..].chars());
-    for item in first {
+    for item in l[..half].chars() {
         if last.contains(&item) {
             return l_score(item);
         }
@@ -34,12 +33,9 @@ fn p1_score(l: &Line) -> i32 {
 
 fn p2_score(chunk: &[Line]) -> i32 {
     let mut iter = chunk.iter();
-    let l = iter.next().unwrap();
-    let set = HashSet::<_>::from_iter(l.chars());
-    let l2 = iter.next().unwrap();
-    let set2 = HashSet::<_>::from_iter(l2.chars());
-    let l3 = iter.next().unwrap();
-    let set3 = HashSet::<_>::from_iter(l3.chars());
+    let set = HashSet::<_>::from_iter(iter.next().unwrap().chars());
+    let set2 = HashSet::<_>::from_iter(iter.next().unwrap().chars());
+    let set3 = HashSet::<_>::from_iter(iter.next().unwrap().chars());
     for item in set.intersection(&set2) {
         if set3.contains(item) {
             return l_score(*item);
