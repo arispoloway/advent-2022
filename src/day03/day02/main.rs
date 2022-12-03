@@ -1,12 +1,14 @@
 use common::*;
 
 #[derive(Debug)]
-struct Line(char, char);
+enum Line {
+    RPS(char, char),
+}
 
 fn line_parser(line: &str, _previous_lines: &Vec<Line>) -> Option<Line> {
     if !line.eq("") {
         let mut split = line.split(' ');
-        Some(Line(
+        Some(Line::RPS(
             split.next().unwrap().chars().next().unwrap(),
             split.next().unwrap().chars().next().unwrap(),
         ))
@@ -17,7 +19,7 @@ fn line_parser(line: &str, _previous_lines: &Vec<Line>) -> Option<Line> {
 
 impl Line {
     fn score1(&self) -> i32 {
-        let Line(c1, c2) = self;
+        let Line::RPS(c1, c2) = self;
         match (c1, c2) {
             ('A', 'X') => 4,
             ('A', 'Y') => 8,
@@ -32,7 +34,7 @@ impl Line {
         }
     }
     fn score2(&self) -> i32 {
-        let Line(c1, c2) = self;
+        let Line::RPS(c1, c2) = self;
         match (c1, c2) {
             ('A', 'X') => 3,
             ('A', 'Y') => 4,
