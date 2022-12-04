@@ -1,12 +1,7 @@
-use std::{env, fs};
+use std::fs;
 
 pub fn read_input_file<T>(day: &str, line_parser: fn(&str, &Vec<T>) -> Option<T>) -> Vec<T> {
-    let source_dir: &str = if env::var("SAMPLE").is_ok() {
-        "sample"
-    } else {
-        "real"
-    };
-    let source_file: String = format!("inputs/{}/day{}.txt", source_dir, day);
+    let source_file: String = format!("inputs/day{}.txt", day);
 
     let mut result: Vec<T> = Vec::new();
     for line in lines(source_file.as_str()) {

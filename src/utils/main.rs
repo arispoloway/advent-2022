@@ -37,7 +37,7 @@ async fn fetch_input(day: i32) {
     if status != 200 {
         println!("{}", text);
     } else {
-        let file_name = format!("inputs/real/day{:02}.txt", day);
+        let file_name = format!("inputs/day{:02}.txt", day);
         let mut file = File::create(&file_name).unwrap();
         file.write(text.as_bytes()).unwrap();
         println!("Wrote input to file '{}'", file_name);

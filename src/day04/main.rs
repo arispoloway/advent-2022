@@ -1,5 +1,4 @@
 use common::*;
-use std::collections::HashSet;
 
 struct Line((i32, i32), (i32, i32));
 
