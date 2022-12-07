@@ -45,8 +45,9 @@ impl Stacks {
         let from_len = self.0[from - 1].len();
         let slice_start = if from_len < num { 0 } else { from_len - num };
 
+        // This to_vec isn't ideal, but idk how to get around it with the mutable borrows I need to
+        // do
         let slice = self.0[from - 1][slice_start..].to_vec();
-
         self.0[to - 1].extend(slice);
         self.0[from - 1].truncate(slice_start);
     }

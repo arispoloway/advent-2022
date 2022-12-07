@@ -33,6 +33,10 @@ path = "src/day04/main.rs"
 name = "day05"
 path = "src/day05/main.rs"
 
+[[bin]]
+name = "day06"
+path = "src/day06/main.rs"
+
 [dependencies]
 reqwest = { version = "0.11", features = ["json"] }
 tokio = { version = "1", features = ["full"] }
