@@ -125,7 +125,7 @@ fn solve2(lines: &Vec<Line>) -> String {
     let mut pg = ExecutingProgram::new(Program::new(lines));
     let mut result = String::new();
 
-    let mut current_line: [char; 40] = ['.'; 40];
+    let mut current_line: [char; 40] = [' '; 40];
     while let ProgramStatus::Running = pg.status {
         let cycle_pos = (pg.cycles % 40) as i32;
         let x_pos = pg.cpu.x - 1;
@@ -140,7 +140,7 @@ fn solve2(lines: &Vec<Line>) -> String {
                 result.push(c);
             }
             result.push('\n');
-            current_line = ['.'; 40];
+            current_line = [' '; 40];
         }
     }
     result
